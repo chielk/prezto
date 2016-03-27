@@ -11,3 +11,57 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+setopt clobber
+
+# Tmux aliases
+alias tmux='tmux -2'
+alias ta='tmux attach -t'
+alias tnew='tmux new -s'
+alias tls='tmux ls'
+alias tkill='tmux kill-session -t'
+
+alias ev='vim ~/.vimrc'
+alias et='vim ~/.tmux.conf'
+alias ez='vim ~/.zshrc'
+
+# Coloured cat
+colorcat () {
+  # Only use pygmentize if:
+  # * pygmentize is inslalled
+  # * writing to terminal
+  if type pygmentize > /dev/null && [ -t 1 ];
+  then
+    for f in $*;
+    do
+      pygmentize -g $f
+    done
+  else
+    /bin/cat $*
+  fi
+}
+alias cat=colorcat
+alias ccat=/bin/cat
+
+alias pqiv='pqiv -ci'
+alias -s png='pqiv -ci'
+alias -s jpg='pqiv -ci'
+alias -s jpeg='pqiv -ci'
+alias -s xpm='pqiv -ci'
+
+alias k='fasd_cd'
+
+# Make okular quiet
+alias okular='okular >& /dev/null'
+
+# Because fg=8 is invisible
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=238'
+
+bindkey '^R' history-incremental-search-backward
+
+if [ "$COLORTERM" = "gnome-terminal" ]; then
+  if [[ "$TERM" =~ xterm.* ]]; then
+    export TERM=gnome-256color
+  else
+    export TERM=tmux-256color
+  fi
+fi
