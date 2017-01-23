@@ -65,3 +65,19 @@ if [ "$COLORTERM" = "gnome-terminal" ]; then
     export TERM=tmux-256color
   fi
 fi
+
+# Show NORMAL vi mode when appropriate
+precmd() {
+  RPROMPT=""
+}
+zle-keymap-select() {
+  RPROMPT=""
+  [[ $KEYMAP = vicmd ]] && RPROMPT="%F{green}%S NORMAL %s%F{default}"
+  () { return $__prompt_status }
+  zle reset-prompt
+}
+zle-line-init() {
+  typeset -g __prompt_status="$?"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
