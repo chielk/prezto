@@ -47,6 +47,7 @@ alias -s png='pqiv -ci'
 alias -s jpg='pqiv -ci'
 alias -s jpeg='pqiv -ci'
 alias -s xpm='pqiv -ci'
+alias -s gif='pqiv -ci'
 
 alias k='fasd_cd'
 
