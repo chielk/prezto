@@ -84,3 +84,5 @@ zle -N zle-keymap-select
 zle -N zle-line-init
 
 export GPG_TTY=$(tty)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
